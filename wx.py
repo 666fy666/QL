@@ -140,7 +140,7 @@ class WeChatPub:
 
 
 
-
+'''
 if __name__ == '__main__':
     # 图片消息模板
     # title,description,url,picurl,btntxt='阅读全文'
@@ -164,3 +164,4 @@ if __name__ == '__main__':
     # <img src="https://bing.img.run/1920x1080.php" alt="Bing每日壁纸1080P高清" />
     # <img src="https://bing.img.run/1366x768.php" alt="Bing每日壁纸普清" />
     # <img src="https://bing.img.run/m.php" alt="Bing每日壁纸手机版1080P高清" />
+'''
