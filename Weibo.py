@@ -143,42 +143,39 @@ class WeiBo:
         print(text)
         return text, mid
 
-    def check(self):  # 判断是否是第一次录入信息并查询微博数
-        try:
-            sql1 = 'select 微博数 from weibo where UID=%s'
-            self.cursor.execute(sql1, self.id)
-            result1 = self.cursor.fetchone()  # 返回一行数据
-            old_num = str(result1[0])
-            sql2 = 'select 文本 from weibo where UID=%s'
-            self.cursor.execute(sql2, self.id)
-            result2 = self.cursor.fetchone()  # 返回一行数据
-            old_text = str(result2[0])
-        except:
-            print("未查找到该用户，将信息录入")
-            old_num = "-1"
-            old_text = "-1"
-        return old_num, old_text
+def check(self):  # 判断是否是第一次录入信息并查询微博数
+    try:
+        sql = 'SELECT 微博数, 文本 FROM weibo WHERE UID=%s'
+        self.cursor.execute(sql, (self.id,))
+        result = self.cursor.fetchone()  # 返回一行数据
+        if result:
+            old_num, old_text = map(str, result)
+        else:
+            raise ValueError("No record found")
+    except Exception as e:
+        print(f"未查找到该用户，将信息录入: {e}")
+        old_num, old_text = "-1", "-1"
+    return old_num, old_text
 
-    def update_database(self, data):  # 更新数据库
-        try:
-            sql1 = 'update weibo set 微博数=%(微博数)s where UID=%(UID)s'
-            sql2 = 'update weibo set 文本=%(文本)s where UID=%(UID)s'
-            self.cursor.execute(sql1, data)
-            self.cursor.execute(sql2, data)
-            self.db.commit()
-        except Exception as e:
-            self.db.rollback()
-            print(e)
+def update_database(self, data):  # 更新数据库
+    try:
+        sql = ('UPDATE weibo SET 用户名=%(用户名)s, 认证信息=%(认证信息)s, 简介=%(简介)s, '
+               '粉丝数=%(粉丝数)s, 微博数=%(微博数)s, 文本=%(文本)s WHERE UID=%(UID)s')
+        self.cursor.execute(sql, data)
+        self.db.commit()
+    except Exception as e:
+        self.db.rollback()
+        print(f"更新数据库失败: {e}")
 
-    def in_database(self, data):  # 插入新数据
-        sql = ('insert into weibo(UID,用户名,认证信息,简介,粉丝数,微博数,文本) '
-               'VALUES(%(UID)s, %(用户名)s, %(认证信息)s,%(简介)s,%(粉丝数)s,%(微博数)s,%(文本)s)')
-        try:
-            self.cursor.execute(sql, data)
-            self.db.commit()
-        except Exception as e:
-            self.db.rollback()
-            print(e)
+def in_database(self, data):  # 插入新数据
+    sql = ('INSERT INTO weibo (UID, 用户名, 认证信息, 简介, 粉丝数, 微博数, 文本) '
+           'VALUES (%(UID)s, %(用户名)s, %(认证信息)s, %(简介)s, %(粉丝数)s, %(微博数)s, %(文本)s)')
+    try:
+        self.cursor.execute(sql, data)
+        self.db.commit()
+    except Exception as e:
+        self.db.rollback()
+        print(f"插入新数据失败: {e}")
 
     def top(self):  # 验证置顶微博数，防止截图错位
         url = "https://weibo.com/ajax/statuses/mymblog?uid=%s&page=1&feature=0" % self.id
