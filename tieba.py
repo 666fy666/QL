@@ -6,8 +6,6 @@ new Env('百度贴吧');
 """
 
 import os
-from wx import WeChatPub
-
 import requests
 import re
 import time
@@ -122,16 +120,7 @@ def tiebaSigninOneByOne(tiebaInfo):
 
     print("本次签到成功%d个，失败%d个" % (success_count, fail_count))
     info = "本次签到成功%d个，失败%d个" % (success_count, fail_count)
-    tip = "https://v1.hitokoto.cn/"
-    res = requests.get(tip).json()
-    res = res["hitokoto"] + "    ----" + res["from"]
-    wechat = WeChatPub()
-    wechat.send_news(
-        title='百度贴吧签到提醒(*￣▽￣*)ブ',  # 标题
-        description='\n{}\n\n{}'.format(info, res),  # 内容
-        to_url="https://tieba.baidu.com/index.html",
-        picurl=r"https://cn.bing.com/th?id=OHR.PortMarseille_ZH-CN3194394496_1920x1080.jpg"  # 图片地址
-    )
+    QLAPI.notify('百度贴吧签到提醒', '{}'.format(info))
 
 
 # 主方法
