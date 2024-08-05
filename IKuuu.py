@@ -113,15 +113,11 @@ class Ikuuu:
 
 
 if __name__ == '__main__':
-    for u in range(0, 100):
+    for u in range(0, 5):
         try:
             ik = Ikuuu()
             ik.main()
-            print("=" * 80)
             break
         except Exception as e:
             print(e)
-    try:
-        os.remove("code.png")
-    except:
-        pass
+
