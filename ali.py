@@ -7,8 +7,6 @@ new Env('阿里云盘8月自动签到');
 """
 import os
 import traceback
-from wx import WeChatPub
-
 import requests
 
 PUSH_PLUS_TOKEN = ''  # push+ 微信推送的用户令牌
