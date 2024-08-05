@@ -110,20 +110,7 @@ class WeiBo:
         info_name = result[0][0]
         info_verified_reason = result[0][1]
         info_description = result[0][2]
-        # 图片消息
-        # title,description,url,picurl,btntxt='阅读全文'
-        #tip = "https://v1.hitokoto.cn/"
-        #res = requests.get(tip).json()
-        #res = res["hitokoto"] + "    ----" + res["from"]
         wechat = WeChatPub()
-        '''
-        wechat.send_text(
-            title='{} {}了{}条weibo'.format(info_name, new, num),  # 标题
-            message='Ta说:👇\n{}\n{}\n认证:{}\n\n简介:{}\n\n{}'.format
-            (text, "=" * 35, info_verified_reason, info_description, res),  # 说明文案
-            purl=r"https://m.weibo.cn/detail/{}".format(mid)  # 链接地址
-        )
-        '''
         wechat.send_news(
             title='{} {}了{}条weibo'.format(info_name, new, num),  # 标题
             description='Ta说:👇\n{}\n{}\n认证:{}\n\n简介:{}'.format
