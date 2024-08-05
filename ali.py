@@ -208,20 +208,10 @@ class ALiYunPan(object):
             return {'name': name, 'description': description}
         except:
             print(f"获取签到奖励异常={traceback.format_exc()}")
-
         return {'name': 'null', 'description': 'null'}
 
     def wx_pro(self, info):
-        tip = "https://v1.hitokoto.cn/"
-        res = requests.get(tip).json()
-        res = res["hitokoto"] + "    ----" + res["from"]
-        wechat = WeChatPub()
-        wechat.send_news(
-            title='阿里云盘签到提醒(*￣▽￣*)ブ',  # 标题
-            description='\n{}\n{}'.format(info, res),  # 说明文案
-            to_url="https://www.aliyundrive.com/sign/in?spm=aliyundrive.index.0.0.2d836f603j2wJa",
-            picurl=r"https://cn.bing.com/th?id=OHR.PortMarseille_ZH-CN3194394496_1920x1080.jpg"  # 图片地址
-        )
+        QLAPI.notify(''阿里云盘签到提醒(*￣▽￣*)ブ', '\n{}'.format(info))
 
 
 def ali_main():
