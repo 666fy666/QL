@@ -176,7 +176,6 @@ class WeiBo:
         except Exception as e:
             self.db.rollback()
             print(f"插入新数据失败: {e}")
-
     
     def top(self):  # 验证置顶微博数，防止截图错位
         url = "https://weibo.com/ajax/statuses/mymblog?uid=%s&page=1&feature=0" % self.id
@@ -194,7 +193,6 @@ class WeiBo:
         }
         r = session.get(url, headers=headers, timeout=60)
         return r
-
 
 def process_user(uid):
     try:
