@@ -5,8 +5,6 @@ new Env('ikuuu机场签到');
 """
 import os
 import re
-from wx import WeChatPub
-
 import requests
 from lxml import etree
 
@@ -111,18 +109,7 @@ class Ikuuu:
         return cookie
 
     def wx_pro(self, info):
-        tip = "https://v1.hitokoto.cn/"
-        res = requests.get(tip).json()
-        res = res["hitokoto"] + "    ----" + res["from"]
-        wechat = WeChatPub()
-   
-        wechat.send_news(
-            title='iKuuu机场签到提醒(*￣▽￣*)ブ',  # 标题
-            description='\n{}\n\n{}'.format(info, res),
-            picurl=r"https://cn.bing.com/th?id=OHR.PortMarseille_ZH-CN3194394496_1920x1080.jpg",
-            to_url="https://ikuuu.pw/",
-            btntxt='阅读全文'
-        )
+        QLAPI.notify('iKuuu机场签到提醒','{}'.format(info))
 
 
 if __name__ == '__main__':
