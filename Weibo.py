@@ -199,8 +199,8 @@ def process_user(uid):
     try:
         weibo = WeiBo(uid)
         weibo.main()
-    except:
-        pass
+    except Exception as e:
+        print(e)
 
 
 if __name__ == '__main__':
