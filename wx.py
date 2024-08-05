@@ -28,29 +28,6 @@ class WeChatPub:
             return
         return json.loads(rep.content)['access_token']
 
-    def get_media_url(self):  # 上传到图片素材 图片url
-        num = 1
-        while True:
-            url = "https://bing.img.run/1366x768.php"
-            header = {
-                "Content-Type": "application/json"
-            }
-            img_name = 'code.png'
-            # 发送请求
-            res = requests.get(url, headers=header,timeout=10)
-            with open(img_name, 'wb') as file_obj:
-                # 保存图片、音频之类 会使用content-->以二进制写入去响应对象里面取
-                file_obj.write(res.content)
-            img_url = f"https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=image" % self.token
-            files = {"media": open(img_name, "rb")}
-            try:
-                r =self.s.post(img_url, files=files, timeout=5)
-                print("第%s次上传,成功" % num)
-                return r.json()["media_id"]
-            except:
-                num = num + 1
-                continue
-
     def send_news(self, title, description, to_url, picurl, btntxt='阅读全文'):# 跳转为链接
         url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + self.token
         header = {
@@ -85,36 +62,6 @@ class WeChatPub:
             return
         return json.loads(rep.content)
 
-    def send_text(self, title, message, purl): # 跳转为文本
-        header = {
-            "Content-Type": "application/json"
-        }
-        media_id = self.get_media_url()
-        url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + self.token
-        send_values = {
-            "touser": "FengYu",
-            "msgtype": "mpnews",
-            "agentid": "1000002",
-            "mpnews": {
-                "articles": [
-                    {
-                        "title": title,
-                        "thumb_media_id": media_id,
-                        "author": "FengYu",
-                        "content_source_url": purl,
-                        "content": message.replace("\n", "<br/>").replace(" ", "&nbsp;"),
-                        "digest": message,
-                    }
-                ]
-            },
-        }
-        print(send_values, type(send_values))
-        rep = self.s.post(url, data=json.dumps(send_values).encode('utf-8'), headers=header)
-        if rep.status_code != 200:
-            print("request failed")
-            return
-        return json.loads(rep.content)
-
     def send_markdown(self, ms):# 跳转为链接
         url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + self.token
         header = {
@@ -137,7 +84,6 @@ class WeChatPub:
             print("request failed")
             return
         return json.loads(rep.content)
-
 
 
 '''
