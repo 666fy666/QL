@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# coding=utf-8
+# -*- coding: utf-8 -*-
 """
 Author: Fy
 cron: 0 10 0 * * ?
