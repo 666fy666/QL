@@ -3,7 +3,7 @@
 """
 Author: Fy
 cron: 0 10 0 * * ?
-new Env('阿里云盘8月自动签到');
+new Env('阿里云盘自动签到');
 """
 import os
 import traceback
