@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Author: Fy
-cron: 0 */1 * * * ?
+cron: 0 */2 * * * ?
 new Env('斗鱼直播监控');
 """
 
