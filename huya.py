@@ -111,7 +111,7 @@ class HuYa:
             description='Ta的虎牙房间号是 : {}\n\n{}\n\n{}'.format
             (self.room_id, res, timestamp),  # 说明文案
             to_url=r'https://m.huya.com/' + str(self.room_id),  # 链接地址
-            picurl=r"https://cn.bing.com/th?id=OHR.PortMarseille_ZH-CN3194394496_1920x1080.jpg"  # 图片地址
+            picurl=r"https://cn.bing.com/th?id=OHR.LacChesserys_ZH-CN4136691056_1920x1080.jpg"  # 图片地址
             # btntxt = '此处跳转'  https://www.picgo.net/image/ymwTq
         )
 
