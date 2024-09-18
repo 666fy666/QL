@@ -117,7 +117,7 @@ class WeiBo:
             title='{} {}了{}条weibo'.format(info_name, new, num),  # 标题
             description='Ta说:👇\n{}\n{}\n认证:{}\n\n简介:{}'.format
             (text, "=" * 35, info_verified_reason, info_description),  # 说明文案
-            picurl=r"https://cn.bing.com/th?id=OHR.CastelmazzanoSunrise_ZH-CN6733875019_1920x1080.jpg",
+            picurl=r"https://cn.bing.com/th?id=OHR.DubrovnikHarbor_ZH-CN8590217905_1920x1080.jpg",
             to_url=r"https://m.weibo.cn/detail/{}".format(mid),  # 链接地址
             btntxt='阅读全文'
         )
