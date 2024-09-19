@@ -37,7 +37,7 @@ class WeChatPub:
         }
         # python 字典若要转json，千万不能用单引号，要用双引号~@@双引号~~~！！！
         form_data = {
-            "touser": "NiHenPi",
+            "touser": "FengYu|NiHenPi",
             "toparty": "",
             "msgtype": "news",
             "agentid": "1000002",
