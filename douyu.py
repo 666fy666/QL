@@ -137,7 +137,7 @@ class DouYu:
         )
         '''
         try:
-            QLAPI.notify('{} {}', 'Ta的斗鱼房间号是 : {}\n\n{}\n\n{}'.format(data["name"], is_live,self.rid, res, timestamp))
+            QLAPI.notify('{} {}🐟🐟🐟'.format(data["name"], is_live), 'Ta的斗鱼房间号是 : {}\n\n{}\n\n{}'.format(self.rid, res, timestamp))
         except:
             pass
 

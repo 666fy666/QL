@@ -38,7 +38,6 @@ class HuYa:
             cursor = db.cursor()
             self.db = db
             self.cursor = cursor
-        
 
     def get_real_url(self):
         room_url = 'https://m.huya.com/' + str(self.room_id)
@@ -117,7 +116,8 @@ class HuYa:
         )
         '''
         try:
-            QLAPI.notify('{} {}', 'Ta的虎牙房间号是 : {}\n\n{}\n\n{}'.format(data["name"], is_live,self.room_id, res, timestamp))
+            QLAPI.notify('{} {}🐯🐯🐯'.format(data["name"], is_live), 'Ta的虎牙房间号是 : {}\n\n{}\n\n{}'.format(self.room_id, res,
+                                                                             timestamp))
         except:
             pass
 
@@ -146,16 +146,16 @@ class HuYa:
             self.db.rollback()
             print(e)
 
+
 def go(rid):
     try:
         app = HuYa(rid)
         app.get_real_url()
     except:
         pass
-    
+
 
 if __name__ == '__main__':
     for i in range(len(rid)):
         go(rid[i])
         print("=" * 40)
-      
