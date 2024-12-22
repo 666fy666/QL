@@ -15,6 +15,7 @@ class Ikuuu:
     def __init__(self):
         self.UserAgent = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/114.0.0.0 Safari/537.36")
+        self.url = "https://ikuuu.org/"
         if os.getenv('Ikuuu'):
             total = os.getenv('Ikuuu')
             allin = re.split(r'[:：;]', total)
@@ -33,11 +34,11 @@ class Ikuuu:
         print(info)
 
     def analysis(self, cookies):
-        url = "https://ikuuu.pw/user"
+        url = "{}user".format(self.url)
         headers = {
             "User-Agent": self.UserAgent,
             "Cookie": cookies,
-            "Referer": "https://ikuuu.pw/auth/login",
+            "Referer": "{}auth/login".format(self.url),
             "X-Requested-With": "XMLHttpRequest",
             "Accept": "application/json, text/javascript, */*; q=0.01",
             "Sec-Ch-Ua": '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"'
@@ -70,11 +71,11 @@ class Ikuuu:
         return info
 
     def sign(self, cookies):  # 签到得流量
-        url = "https://ikuuu.pw/user/checkin"
+        url = "{}user/checkin".format(self.url)
         headers = {
             "User-Agent": self.UserAgent,
             "Cookie": cookies,
-            "Referer": "https://ikuuu.pw/auth/login",
+            "Referer": "{}auth/login".format(self.url),
             "X-Requested-With": "XMLHttpRequest",
             "Accept": "application/json, text/javascript, */*; q=0.01",
             "Sec-Ch-Ua": '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"'
@@ -87,10 +88,10 @@ class Ikuuu:
         return info
 
     def login(self):  # 拿账号密码登录获取cookies
-        url = "https://ikuuu.pw/auth/login"
+        url = "{}auth/login".format(self.url)
         headers = {
             "User-Agent": self.UserAgent,
-            "Referer": "https://ikuuu.pw/auth/login",
+            "Referer": "{}auth/login".format(self.url),
             "X-Requested-With": "XMLHttpRequest",
             "Accept": "application/json, text/javascript, */*; q=0.01",
             "Sec-Ch-Ua": '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"'
@@ -111,7 +112,10 @@ class Ikuuu:
         return cookie
 
     def wx_pro(self, info):
-        QLAPI.notify('iKuuu机场签到提醒','{}'.format(info))
+        try:
+            QLAPI.notify('iKuuu机场签到提醒', '{}'.format(info))
+        except:
+            pass
 
 
 if __name__ == '__main__':
@@ -122,4 +126,3 @@ if __name__ == '__main__':
             break
         except Exception as e:
             print(e)
-
