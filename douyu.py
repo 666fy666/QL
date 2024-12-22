@@ -113,6 +113,7 @@ class DouYu:
             self.wx_pro(data)
 
     def wx_pro(self, data):  # 采用企业微信图文推送（效果好）
+
         # 图片消息
         # title,description,url,picurl,btntxt='阅读全文'
         tip = "https://v1.hitokoto.cn/"
@@ -124,6 +125,7 @@ class DouYu:
             is_live = "开播了"
         else:
             is_live = "下播了"
+        '''
         wechat = WeChatPub()
         wechat.send_news(
             title='{} {}'.format(data["name"], is_live),  # 标题
@@ -133,6 +135,11 @@ class DouYu:
             picurl=r"https://cn.bing.com/th?id=OHR.PortMarseille_ZH-CN3194394496_1920x1080.jpg"  # 图片地址
             # btntxt = '此处跳转'  https://www.picgo.net/image/ymwTq
         )
+        '''
+        try:
+            QLAPI.notify('{} {}', 'Ta的斗鱼房间号是 : {}\n\n{}\n\n{}'.format(data["name"], is_live,self.rid, res, timestamp))
+        except:
+            pass
 
     def check(self, data):  # 写入并更新直播状态
         self.del_database()

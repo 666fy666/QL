@@ -105,6 +105,7 @@ class HuYa:
             is_live = "开播了"
         else:
             is_live = "下播了"
+        '''
         wechat = WeChatPub()
         wechat.send_news(
             title='{} {}🐯🐯🐯'.format(data["name"], is_live),  # 标题
@@ -114,6 +115,11 @@ class HuYa:
             picurl=r"https://cn.bing.com/th?id=OHR.DolbadarnCastle_ZH-CN5397592090_1920x1080.jpg"  # 图片地址
             # btntxt = '此处跳转'  https://www.picgo.net/image/ymwTq
         )
+        '''
+        try:
+            QLAPI.notify('{} {}', 'Ta的虎牙房间号是 : {}\n\n{}\n\n{}'.format(data["name"], is_live,self.room_id, res, timestamp))
+        except:
+            pass
 
     def check(self, data):  # 写入并更新直播状态
         self.del_database()
