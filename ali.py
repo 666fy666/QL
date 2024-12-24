@@ -9,6 +9,8 @@ import os
 import traceback
 import requests
 
+from Send import PrivateMessage
+
 PUSH_PLUS_TOKEN = ''  # push+ 微信推送的用户令牌
 # server 酱的 PUSH_KEY，兼容旧版与 Turbo 版
 PUSH_KEY = ''
@@ -173,14 +175,14 @@ class ALiYunPan(object):
                         PushPlus_send(PUSH_PLUS_TOKEN, title, msg)
                 else:
                     print(f"resp_json={resp_json}")
-                    self.wx_pro(resp_json)
+                    #self.wx_pro(resp_json)
             else:
                 print(f"resp_json={resp_json}")
                 # logger.debug(f"code={code}")
-                self.wx_pro(resp_json)
+                #self.wx_pro(resp_json)
         except:
             print(f"签到异常={traceback.format_exc()}")
-            self.wx_pro(f"签到异常={traceback.format_exc()}")
+            #self.wx_pro(f"签到异常={traceback.format_exc()}")
 
     def get_reward(self, day):
         try:
@@ -209,7 +211,9 @@ class ALiYunPan(object):
         return {'name': 'null', 'description': 'null'}
 
     def wx_pro(self, info):
-        QLAPI.notify('阿里云盘签到提醒', '\n{}'.format(info))
+        # QLAPI.notify('阿里云盘签到提醒', '\n{}'.format(info))
+        responder_pri = PrivateMessage()
+        responder_pri.send_private_message("657769008", info)
 
 
 def ali_main():

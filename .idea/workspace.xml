@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d728f17-4d86-4c60-aadf-b3101f2f444e" name="更改" comment="优化登录和推送逻辑">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7d728f17-4d86-4c60-aadf-b3101f2f444e" name="更改" comment="修复直播提醒的推送内容">
+      <change afterPath="$PROJECT_DIR$/Send.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IKuuu.py" beforeDir="false" afterPath="$PROJECT_DIR$/IKuuu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ali.py" beforeDir="false" afterPath="$PROJECT_DIR$/ali.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/douyu.py" beforeDir="false" afterPath="$PROJECT_DIR$/douyu.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/huya.py" beforeDir="false" afterPath="$PROJECT_DIR$/huya.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tieba.py" beforeDir="false" afterPath="$PROJECT_DIR$/tieba.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,22 +36,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Python.IKuuu.executor": "Run",
-    "Python.Weibo.executor": "Run",
-    "Python.douyu.executor": "Run",
-    "Python.tieba.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/github/QL",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Python.IKuuu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Weibo.executor&quot;: &quot;Run&quot;,
+    &quot;Python.douyu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tieba.executor&quot;: &quot;Run&quot;,
+    &quot;Python.wx.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/github/QL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Subversion&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Python.douyu">
+}</component>
+  <component name="RunManager" selected="Python.wx">
     <configuration name="IKuuu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="QL" />
       <option name="ENV_FILES" value="" />
@@ -137,12 +140,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="wx" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="QL" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wx.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.douyu" />
-        <item itemvalue="Python.IKuuu" />
+        <item itemvalue="Python.wx" />
         <item itemvalue="Python.tieba" />
+        <item itemvalue="Python.douyu" />
         <item itemvalue="Python.Weibo" />
+        <item itemvalue="Python.IKuuu" />
       </list>
     </recent_temporary>
   </component>
@@ -154,6 +180,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\0000\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
       <changelist id="7d728f17-4d86-4c60-aadf-b3101f2f444e" name="更改" comment="" />
@@ -194,7 +223,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734862403017</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="修改直播提醒的推送逻辑">
+      <option name="closed" value="true" />
+      <created>1734862785590</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1734862785590</updated>
+    </task>
+    <task id="LOCAL-00006" summary="修复直播提醒的推送内容">
+      <option name="closed" value="true" />
+      <created>1734863545704</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1734863545704</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,6 +261,8 @@
     <MESSAGE value="修改readme" />
     <MESSAGE value="修改" />
     <MESSAGE value="优化登录和推送逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化登录和推送逻辑" />
+    <MESSAGE value="修改直播提醒的推送逻辑" />
+    <MESSAGE value="修复直播提醒的推送内容" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复直播提醒的推送内容" />
   </component>
 </project>

@@ -14,6 +14,8 @@ from datetime import datetime
 
 import pymysql
 import requests
+
+from Send import PrivateMessage
 from wx import WeChatPub
 
 url = "https://raw.gitcode.com/qq_35720175/web/raw/main/config.json"
@@ -138,6 +140,10 @@ class DouYu:
         '''
         try:
             QLAPI.notify('{} {}🐟🐟🐟'.format(data["name"], is_live), 'Ta的斗鱼房间号是 : {}\n\n{}\n\n{}'.format(self.rid, res, timestamp))
+            info = '{} {}🐟🐟🐟'.format(data["name"], is_live), 'Ta的斗鱼房间号是 : {}\n\n{}\n\n{}'.format(self.rid, res,
+                                                                                                        timestamp)
+            responder_pri = PrivateMessage()
+            responder_pri.send_private_message("657769008", info)
         except:
             pass
 
