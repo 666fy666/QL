@@ -10,8 +10,6 @@ import re
 import requests
 from lxml import etree
 
-from Send import PrivateMessage
-
 
 class Ikuuu:
     def __init__(self):
