@@ -123,8 +123,7 @@ def tiebaSigninOneByOne(tiebaInfo):
     print("本次签到成功%d个，失败%d个" % (success_count, fail_count))
     info = "本次签到成功%d个，失败%d个" % (success_count, fail_count)
     QLAPI.notify('百度贴吧签到提醒', '{}'.format(info))
-    responder_pri = PrivateMessage()
-    responder_pri.send_private_message("657769008", info)
+
 
 
 # 主方法
