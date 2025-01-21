@@ -168,7 +168,7 @@ class ALiYunPan(object):
                     log_info = f"🔥打卡进度:{sign_in_count}/{len(sign_in_logs_list)}"
                     print(log_info)
                     msg = log_info + '\n\n' + msg
-                    self.wx_pro(msg)
+                    # self.wx_pro(msg)
                     if PUSH_KEY:
                         ServerChan_send(PUSH_KEY, title, msg)
                     if PUSH_PLUS_TOKEN:
