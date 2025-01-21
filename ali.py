@@ -211,9 +211,8 @@ class ALiYunPan(object):
         return {'name': 'null', 'description': 'null'}
 
     def wx_pro(self, info):
-        # QLAPI.notify('阿里云盘签到提醒', '\n{}'.format(info))
-        responder_pri = PrivateMessage()
-        responder_pri.send_private_message("657769008", info)
+        QLAPI.notify('阿里云盘签到提醒', '\n{}'.format(info))
+
 
 
 def ali_main():
