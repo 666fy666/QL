@@ -116,8 +116,6 @@ class Ikuuu:
     def wx_pro(self, info):
         try:
             QLAPI.notify('iKuuu机场签到提醒', '{}'.format(info))
-            responder_pri = PrivateMessage()
-            responder_pri.send_private_message("657769008", info)
         except:
             pass
 
