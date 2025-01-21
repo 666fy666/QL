@@ -9,7 +9,7 @@ import os
 import traceback
 import requests
 
-from Send import PrivateMessage
+
 
 PUSH_PLUS_TOKEN = ''  # push+ 微信推送的用户令牌
 # server 酱的 PUSH_KEY，兼容旧版与 Turbo 版
