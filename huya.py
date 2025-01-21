@@ -114,22 +114,27 @@ class HuYaMonitor:
 
     def _send_notification(self, data, status):
         """发送微信通知"""
-        try:
-            hitokoto = requests.get("https://v1.hitokoto.cn/").json()
-            quote = f'{hitokoto["hitokoto"]} —— {hitokoto["from"]}'
+        
+            # 修改点：添加语录获取的容错处理
+            try:
+                hitokoto = requests.get("https://v1.hitokoto.cn/", timeout=3).json()
+                quote = f'\n\n{hitokoto["hitokoto"]} —— {hitokoto["from"]}\n\n'
+            except Exception as e:
+                print(f"[{data['name']}] 获取语录失败: {e}")
+                quote = ''  # 失败时设为空文本
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             status_text = "开播了" if status else "下播了"
 
             # 修改点3：日志添加主播信息
             print(f"正在给 {data['name']}（{self.room_id}）发送通知...")
-            
+            '''
             WeChatPub().send_news(
                 title=f'{data["name"]} {status_text}🐯🐯🐯',
                 description=f'房间号: {self.room_id}\n\n{quote}\n\n{timestamp}',
                 to_url=f'https://m.huya.com/{self.room_id}',
                 picurl="https://cn.bing.com/th?id=OHR.DolbadarnCastle_ZH-CN5397592090_1920x1080.jpg"
             )
-
+            '''
             try:
                 QLAPI.notify(
                     f'{data["name"]} {status_text}',
@@ -138,8 +143,7 @@ class HuYaMonitor:
             except Exception as e:
                 print(f"[{data['name']}] QLAPI通知失败: {e}")
 
-        except requests.RequestException as e:
-            print(f"[{data['name']}] 获取每日语录失败: {e}")
+
 
 
 def main():
