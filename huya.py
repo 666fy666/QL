@@ -65,16 +65,16 @@ class HuYaMonitor:
             profile_info = json.loads(re.search(r'"tProfileInfo":({.*?})', page_content).group(1))
             live_status = int(re.search(r'"eLiveStatus":(\d+)', page_content).group(1))
             
-            status_num = 1 if live_status == 2 else 0  # 简化状态判断
+            status_num = 1 if live_status == 2 else 0
             self._process_status({
                 "room": self.room_id,
-                "name": profile_info["sNick"]
+                "name": profile_info["sNick"]  # 确保此处获取主播名称
             }, status_num)
             
         except requests.RequestException as e:
-            print(f"请求异常: {e}")
+            print(f"[{self.room_id}] 请求异常: {e}")
         except (AttributeError, json.JSONDecodeError) as e:
-            print(f"数据解析失败: {e}")
+            print(f"[{self.room_id}] 数据解析失败: {e}")
 
     def _process_status(self, data, status):
         """处理直播状态变更"""
@@ -83,31 +83,34 @@ class HuYaMonitor:
                 cursor.execute('SELECT is_live FROM huya WHERE room = %s', self.room_id)
                 result = cursor.fetchone()
 
+                # 修改点1：添加主播名称到日志输出
                 if result and result['is_live'] == status:
-                    print(f"{self.room_id} 的直播状态未变化")
+                    print(f"主播 {data['name']}（房间号：{self.room_id}）的直播状态未变化")
                     return
 
                 self._update_database(data, status)
                 self._send_notification(data, status)
 
         except pymysql.Error as e:
-            print(f"数据库操作失败: {e}")
+            print(f"[{data['name']}] 数据库操作失败: {e}")
             self.db.rollback()
 
     def _update_database(self, data, status):
         """更新数据库记录"""
         with closing(self.db.cursor()) as cursor:
             try:
+                # 修改点2：添加操作对象信息
+                print(f"正在更新 {data['name']}（{self.room_id}）的直播状态...")
                 cursor.execute('DELETE FROM huya WHERE room = %s', self.room_id)
                 cursor.execute(
                     'INSERT INTO huya (room, name, is_live) VALUES (%s, %s, %s)',
                     (data["room"], data["name"], status)
                 )
                 self.db.commit()
-                print("数据库更新成功")
+                print(f"主播 {data['name']}（{self.room_id}）数据库更新成功")
             except pymysql.Error as e:
                 self.db.rollback()
-                print(f"数据库更新失败: {e}")
+                print(f"主播 {data['name']}（{self.room_id}）数据库更新失败: {e}")
 
     def _send_notification(self, data, status):
         """发送微信通知"""
@@ -117,7 +120,9 @@ class HuYaMonitor:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             status_text = "开播了" if status else "下播了"
 
-            # 企业微信通知
+            # 修改点3：日志添加主播信息
+            print(f"正在给 {data['name']}（{self.room_id}）发送通知...")
+            
             WeChatPub().send_news(
                 title=f'{data["name"]} {status_text}🐯🐯🐯',
                 description=f'房间号: {self.room_id}\n\n{quote}\n\n{timestamp}',
@@ -125,29 +130,29 @@ class HuYaMonitor:
                 picurl="https://cn.bing.com/th?id=OHR.DolbadarnCastle_ZH-CN5397592090_1920x1080.jpg"
             )
 
-            # 其他通知方式
             try:
                 QLAPI.notify(
                     f'{data["name"]} {status_text}',
                     f'房间号: {self.room_id}\n\n{quote}\n\n{timestamp}'
                 )
             except Exception as e:
-                print(f"QLAPI通知失败: {e}")
+                print(f"[{data['name']}] QLAPI通知失败: {e}")
 
         except requests.RequestException as e:
-            print(f"获取每日语录失败: {e}")
+            print(f"[{data['name']}] 获取每日语录失败: {e}")
 
 
 def main():
     for room_id in ROOM_IDS:
         try:
+            print(f"\n{' 开始处理 ':*^40}")
             monitor = HuYaMonitor(room_id)
             monitor.get_real_url()
-            print("=" * 40)
+            print(f"{' 处理完成 ':*^40}\n")
         except Exception as e:
-            print(f"处理房间 {room_id} 时发生错误: {e}")
+            print(f"[{room_id}] 处理异常: {e}")
         finally:
-            monitor.db.close()  # 确保关闭数据库连接
+            monitor.db.close()
 
 
 if __name__ == '__main__':
